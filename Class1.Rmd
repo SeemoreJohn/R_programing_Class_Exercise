@@ -1,0 +1,306 @@
+---
+title: "Class1"
+author: "Seemore"
+date: "2025-10-17"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+##Numeric
+```{r}
+x <- c(0.5, 0.6)
+ age<-c(20,35,32,29)
+ summary(age)
+```
+
+```{r}
+ age<-c(35,24,18,24)
+ mean(age)
+ ``` 
+##Logical
+```{r}
+ x <- c(TRUE, FALSE)
+ x <- c(T, F)
+```
+
+```{r}
+ x<-c("a","b","c")
+ class<-c("M","F","F","M")
+```
+
+## Integer
+```{r}
+  x<-9:29
+```
+## Complex
+```{r}
+ x<-c(1+0i,2+4i)
+```
+## Matrix and operation within matrices
+```{r}
+ x<-matrix(1:6,nrow=2,ncol=3)
+ x
+```
+```{r}
+y<-matrix(1:6,nrow=3,ncol=2)
+y
+```
+```{r}
+ x%*%y
+```
+## List
+```{r}
+x<-list(1,"a",TRUE,1+4i)
+ x
+```
+## factor
+```{r}
+x<-factor(c("yes","yes","no","yes","no"))
+```
+## CreateavectorwithNAsinit
+```{R}
+x<-c(1,2,NA,10,3)
+```
+## ReturnalogicalvectorindicatingwhichelementsareNA
+```{R}
+is.na(x)
+```
+```{R}
+ x<-c(1,2,4,"NA",5)
+ bad<-is.na(x)
+ print(bad)
+```
+```{R}
+ x[!bad]
+```
+```{R}
+ x<-c(1,2,NA,4,NA,5)
+ y<-c("a","b",NA,"d",NA,"f")
+ good<-complete.cases(x,y)
+ good
+```
+## Coercion
+```{r}
+ sum(c(TRUE,TRUE,FALSE,FALSE,FALSE))
+```
+###Let’screateadataframe
+```{r} 
+studentID<-c(1,2,3,4,5)
+ math_score<-c(12,17,10,9,NA)
+ gender<-c("M","F","M","M","F")
+ it_score<-c(13,18,11,10,19)
+ scoredata<-data.frame(studentID,gender,math_score,it_score)
+ scoredata
+```
+## Create data from Keyboard
+```{r}
+data_class2<-data.frame(height=numeric(0),weight=numeric(0),bmi=numeric
+ (0))
+ data_class2<-edit(data_class2)
+ data_class2
+```
+
+```{r}
+data_class<-read.table("C:\\Users\\HP\\Downloads\\Book.txt")
+variable.names(data_class)
+head(data_class)
+```
+```{r}
+ tail(data_class)
+```
+```{r}
+data_class[10:20,]
+```
+```{r}
+ summary(data_class$WEIGHT)
+```
+```{r}
+length(data_class$WEIGHT)
+```
+
+```{r}
+data_class[,-1]
+```
+
+```{r}
+ data()#listofdatasetscurrentlyavailable
+ data("airquality")
+ variable.names(airquality)
+```
+```{r}
+ str(airquality)
+```
+```{r}
+data_class
+summary(data_class)
+```
+```{r}
+ str(data_class)
+```
+```{r}
+summary(data_class)
+```
+
+```{r}
+  apply(data_class,2,mean)
+
+```
+```{r}
+   apply(data_class, 2, sd)
+```
+```{r}
+   c(mean(data_class$HEIGHT),sd(data_class$HEIGHT))
+```
+```{r}
+   c(mean(data_class$WEIGHT),sd(data_class$WEIGHT))
+```
+```{r}
+    c(Mean=mean(data_class$HEIGHT),SD=sd(data_class$HEIGHT))
+```
+```{r}
+    c(Mean=mean(data_class$WEIGHT),SD=sd(data_class$WEIGHT))
+```
+## Relationship between a categorical and a continuous variable
+
+```{r}
+data("C:\\Users\\HP\\Downloads\\iris.txt")
+head(iris)
+```
+```{r}
+ mean(iris$Petal.Length)
+```
+
+```{r}
+ mean(iris$Petal.Length[iris$Species=="setosa"])
+```
+```{r}
+ mean(iris$Petal.Length[iris$Species=="versicolor"])
+```
+```{r}
+ mean(iris$Petal.Length[iris$Species=="virginica"])
+```
+```{r}
+ ##shortcut
+ by(iris$Petal.Length,iris$Species,mean)
+```
+```{r}
+ by(iris$Petal.Length,iris$Species,sd)
+```
+```{r}
+by(iris$Petal.Length,iris$Species,summary)
+```
+```{r}
+ boxplot(iris$Sepal.Length~iris$Species,data=iris, main="Comparison")
+```
+
+```{r}
+ucba<-data.frame(UCBAdmissions)
+head(ucba)
+```
+```{r}
+ cross<-xtabs(Freq~Gender+Admit,data=ucba)
+ (cross<-xtabs(Freq~Gender+Admit,data=ucba))
+```
+##IstheregenderbiasinUCBgraduateadmissionprocess?
+```{r} 
+ prop.table(cross,2)
+```
+```{r}
+cross2<-xtabs(Freq~Gender+Admit,data=ucba[ucba$Dept=="A",])
+ prop.table(cross2,1)
+```
+## Bar Char
+```{r}
+dat<-read.table(text="ProdAProdBProdCProdD
+ 1110506070
+ 2120508065",header=TRUE)
+ barplot(as.matrix(dat),beside=FALSE,col=c("Red","green"))
+```
+```{r}
+#barplot(as.matrix(dat),beside=TRUE,col=c("gold3","red"))
+ dat <- read.table(text = "A B C D E F G
+ 1 10 80 30 90 70 60 90
+ 2 20 50 70 50 40 10 40
+ 3 60 80 80 60 60 30 160
+ 4 20 40 70 80 20 10 70", header = TRUE)
+ barplot(as.matrix(dat))
+
+```
+
+```{r}
+ plot(WEIGHT~HEIGHT,data=data_class)
+```
+
+```{r}
+plot(data_class$HEIGHT,data_class$WEIGHT)
+```
+
+```{r}
+plot(data_class[,1],data_class[,2])
+
+```
+
+```{r}
+cor(data_class$HEIGHT,data_class$WEIGHT)
+```
+
+```{r}
+plot(WEIGHT~HEIGHT,data=data_class)
+ abline(lm(WEIGHT~HEIGHT,data=data_class)$coefficient)
+```
+
+```{r}
+ data_lm<-lm(WEIGHT~HEIGHT,data=data_class)
+ summary(data_lm)
+```
+```{r}
+ hist(data_class$HEIGHT)
+```
+```{r}
+hist(data_class$WEIGHT,col = "blue")
+```
+
+```{r}
+ plot(WEIGHT~HEIGHT,data=data_class)
+ abline(lm(WEIGHT~HEIGHT,data=data_class)$coefficient)
+ lines(lowess(data_class$HEIGHT,data_class$WEIGHT),col="blue")
+
+```
+
+```{r}
+cor(data_class$HEIGHT,data_class$WEIGHT)
+```
+
+```{r}
+model1<-lm(WEIGHT~HEIGHT,data=data_class)
+```
+```{r}
+attach(data_class)
+ (BMI<-WEIGHT/(HEIGHT/100)^2)
+```
+```{r}
+ (BMI<-round(WEIGHT/(HEIGHT/100)^2,digit=2))
+```
+
+```{r}
+ head(cbind(data_class,BMI),n=5)
+```
+
+```{r}
+new_data_class<-cbind(data_class,BMI)
+ tail(cbind(data_class,BMI),n=10)
+```
+```{r}
+  summary(BMI)
+ ```
+ ```{r}
+  stem(BMI,scale=2)
+  ```
